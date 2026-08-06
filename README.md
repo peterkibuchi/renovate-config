@@ -31,3 +31,6 @@ and tune your own copy. Validate any change with
 - **Non-major updates automerge on green CI; majors get individual PRs and a human.**
 - **`vulnerabilityAlerts` automerge** — security fixes don't wait for the weekly
   window.
+
+- **`rebaseWhen: auto`** — Renovate rebases behind-base branches when automerge is on or the
+  repo requires up-to-date branches; otherwise only on conflict. Grouping keeps the count low.
