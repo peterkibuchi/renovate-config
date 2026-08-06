@@ -34,3 +34,5 @@ and tune your own copy. Validate any change with
 
 - **`rebaseWhen: auto`** — Renovate rebases behind-base branches when automerge is on or the
   repo requires up-to-date branches; otherwise only on conflict. Grouping keeps the count low.
+
+- **Majors** automerge on green like everything else, but stay individual and soak 5 days.

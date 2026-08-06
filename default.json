@@ -61,11 +61,12 @@
       "automerge": true
     },
     {
-      "description": "Majors are individual and human-reviewed",
+      "description": "Majors automerge too, but stay individual (never grouped) so one breaking bump can't block unrelated updates, and soak longer than the fleet default: a major's early patch releases are where the regressions surface, and CI can only catch what it tests.",
       "matchUpdateTypes": [
         "major"
       ],
-      "automerge": false
+      "automerge": true,
+      "minimumReleaseAge": "5 days"
     }
   ],
   "vulnerabilityAlerts": {
