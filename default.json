@@ -7,6 +7,7 @@
   "rangeStrategy": "bump",
   "minimumReleaseAge": "1 day",
   "internalChecksFilter": "strict",
+  "osvVulnerabilityAlerts": true,
   "schedule": [
     "before 6am"
   ],

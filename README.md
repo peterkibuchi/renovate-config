@@ -29,6 +29,10 @@ and tune your own copy. Validate any change with
 - **`rebaseWhen: conflicted`** — merging one PR doesn't trigger CI reruns on every
   other open PR. Your CI on the default branch still catches bad combinations.
 - **Non-major updates automerge on green CI; majors get individual PRs and a human.**
+- **`osvVulnerabilityAlerts: true`** — adds the [OSV database](https://osv.dev) alongside GitHub's
+  advisories, so a vulnerability reaches you even when GitHub hasn't ingested it yet. Requires the
+  repo to have Dependabot *alerts* enabled (alerts only — automated fixes stay off; Renovate owns
+  the PRs).
 - **`vulnerabilityAlerts` automerge** — security fixes don't wait for the weekly
   window.
 
