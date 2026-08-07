@@ -33,6 +33,10 @@ and tune your own copy. Validate any change with
   advisories, so a vulnerability reaches you even when GitHub hasn't ingested it yet. Requires the
   repo to have Dependabot *alerts* enabled (alerts only — automated fixes stay off; Renovate owns
   the PRs).
+- **`vulnerabilityAlerts.minimumReleaseAge: 1 day`** — deliberately mirrors pnpm 11's own
+  `minimumReleaseAge`. Renovate defaults this to `null` (no soak), which opens a CVE PR that pnpm
+  then refuses to install: red for a day, same landing time, one wasted CI run, and a red PR that
+  teaches you to ignore red. **If pnpm's default changes, change this with it.**
 - **`vulnerabilityAlerts` automerge** — security fixes don't wait for the weekly
   window.
 

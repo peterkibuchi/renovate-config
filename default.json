@@ -71,6 +71,8 @@
     }
   ],
   "vulnerabilityAlerts": {
+    "description": "Security fixes skip the schedule and merge on green. The 1-day soak MIRRORS pnpm 11's own minimumReleaseAge (1440 min) \u2014 Renovate's default here is null, which would open a PR that pnpm then refuses to install, so it sits red for a day and trains everyone to ignore red. Same landing time either way; this way the PR is born installable. Keep this value in step with pnpm's.",
+    "minimumReleaseAge": "1 day",
     "automerge": true,
     "labels": [
       "security"
