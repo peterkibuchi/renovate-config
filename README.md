@@ -24,11 +24,17 @@ and tune your own copy. Validate any change with
   created once a release is a day old. This matches pnpm 11's default release-age
   gate (so PRs aren't born failing `pnpm install`) and gives the ecosystem time to
   catch yanked or malicious releases before they reach you.
-- **`group:allNonMajor` + weekly schedule** — one grouped PR for patch/minor updates
-  instead of dozens. Fewer PRs, fewer CI runs, nothing left "behind base" to churn.
-- **`rebaseWhen: conflicted`** — merging one PR doesn't trigger CI reruns on every
-  other open PR. Your CI on the default branch still catches bad combinations.
-- **Non-major updates automerge on green CI; majors get individual PRs and a human.**
+- **Daily grouped non-major updates, automerged on green CI** — two groups (prod, and
+  dev/tooling — CI managers like GitHub Actions and Dockerfiles ride with dev, since
+  lone PRs from those managers go stale behind their siblings) on a before-6am
+  schedule. Few PRs, few CI runs, nothing left "behind base" to churn.
+- **Majors automerge on green too — but stay individual (never grouped) and soak 5
+  days**: one breaking bump can't block unrelated updates, and a major's early patch
+  releases are where regressions surface. CI is the sole gate here; a repo with a thin
+  test suite should override with `"automerge": false` for majors.
+- **`rebaseWhen: auto`** — Renovate rebases behind-base branches when automerge is on
+  or the repo requires up-to-date branches; otherwise only on conflict. Grouping is
+  what keeps the rebase count low.
 - **`osvVulnerabilityAlerts: true`** — adds the [OSV database](https://osv.dev) alongside GitHub's
   advisories, so a vulnerability reaches you even when GitHub hasn't ingested it yet. Requires the
   repo to have Dependabot *alerts* enabled (alerts only — automated fixes stay off; Renovate owns
@@ -37,10 +43,5 @@ and tune your own copy. Validate any change with
   `minimumReleaseAge`. Renovate defaults this to `null` (no soak), which opens a CVE PR that pnpm
   then refuses to install: red for a day, same landing time, one wasted CI run, and a red PR that
   teaches you to ignore red. **If pnpm's default changes, change this with it.**
-- **`vulnerabilityAlerts` automerge** — security fixes don't wait for the weekly
-  window.
-
-- **`rebaseWhen: auto`** — Renovate rebases behind-base branches when automerge is on or the
-  repo requires up-to-date branches; otherwise only on conflict. Grouping keeps the count low.
-
-- **Majors** automerge on green like everything else, but stay individual and soak 5 days.
+- **`vulnerabilityAlerts` automerge** — security fixes skip the schedule and merge on
+  green.
