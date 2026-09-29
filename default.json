@@ -29,13 +29,12 @@
       "automerge": true
     },
     {
-      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. packageManager and engines pins count as tooling: with no rule of their own, their green PRs waited for a human.",
+      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin counts as tooling: with no rule of its own, its green PRs waited for a human.",
       "matchDepTypes": [
         "devDependencies",
         "peerDependencies",
         "optionalDependencies",
-        "packageManager",
-        "engines"
+        "packageManager"
       ],
       "matchUpdateTypes": [
         "minor",
@@ -47,12 +46,13 @@
       "automerge": true
     },
     {
-      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, regex-managed versions, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",
+      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",
       "matchManagers": [
         "github-actions",
         "dockerfile",
         "docker-compose",
         "nvm",
+        "custom.jsonata",
         "custom.regex"
       ],
       "matchUpdateTypes": [
