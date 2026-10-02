@@ -29,12 +29,14 @@
       "automerge": true
     },
     {
-      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin counts as tooling: with no rule of its own, its green PRs waited for a human.",
+      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin, engines ranges and pnpm catalog entries count as tooling: with no rule of their own, their green PRs waited for a human.",
       "matchDepTypes": [
         "devDependencies",
         "peerDependencies",
         "optionalDependencies",
-        "packageManager"
+        "packageManager",
+        "engines",
+        "pnpm.catalog.*"
       ],
       "matchUpdateTypes": [
         "minor",
@@ -44,6 +46,13 @@
       ],
       "groupName": "dev non-major",
       "automerge": true
+    },
+    {
+      "description": "engines ranges are replaced, never bumped: under rangeStrategy bump, every Node release raised each project's floor, which breaks installs on machines one patch behind. Exact pins still move.",
+      "matchDepTypes": [
+        "engines"
+      ],
+      "rangeStrategy": "replace"
     },
     {
       "description": "CI/tooling managers (GitHub Actions, Dockerfiles, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",

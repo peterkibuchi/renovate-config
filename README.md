@@ -26,9 +26,10 @@ and tune your own copy. Validate any change with
   catch yanked or malicious releases before they reach you.
 - **Daily grouped non-major updates, automerged on green CI** — two groups (prod, and
   dev/tooling — CI managers like GitHub Actions and Dockerfiles, custom managers (such as
-  the biome schema tracker), and the `packageManager` pin ride with dev, since lone PRs of
-  those kinds go stale behind their siblings. `engines` ranges stay out: bumping a Node
-  floor unattended can break installs on older machines) on a before-6am
+  the biome schema tracker), the `packageManager` pin, `engines` ranges and pnpm catalog
+  entries ride with dev, since lone PRs of those kinds go stale behind their siblings.
+  `engines` uses `rangeStrategy: replace`, so a range only changes when a release falls
+  outside it, and Node floors are never raised just because a new Node shipped) on a before-6am
   schedule. Few PRs, few CI runs, nothing left "behind base" to churn.
 - **Majors automerge on green too — but stay individual (never grouped) and soak 5
   days**: one breaking bump can't block unrelated updates, and a major's early patch
