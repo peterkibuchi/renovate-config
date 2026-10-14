@@ -13,6 +13,14 @@
   ],
   "prConcurrentLimit": 3,
   "rebaseWhen": "auto",
+  "lockFileMaintenance": {
+    "description": "Monthly lockfile refresh: transitive deps move without a direct bump. Automerges on green like the other non-major groups.",
+    "enabled": true,
+    "schedule": [
+      "before 6am on the first day of the month"
+    ],
+    "automerge": true
+  },
   "packageRules": [
     {
       "description": "Prod deps (non-major): grouped daily, automerge on green",
