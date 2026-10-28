@@ -37,14 +37,17 @@
       "automerge": true
     },
     {
-      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin, engines ranges and pnpm catalog entries count as tooling: with no rule of their own, their green PRs waited for a human.",
+      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin, engines ranges, pnpm catalog entries and overrides count as tooling: with no rule of their own, their green PRs waited for a human. An override usually mirrors a catalog or devDependency entry, so the two move in one PR.",
       "matchDepTypes": [
         "devDependencies",
         "peerDependencies",
         "optionalDependencies",
         "packageManager",
         "engines",
-        "pnpm.catalog.*"
+        "pnpm.catalog.*",
+        "overrides",
+        "pnpm.overrides",
+        "pnpm-workspace.overrides"
       ],
       "matchUpdateTypes": [
         "minor",
@@ -63,12 +66,13 @@
       "rangeStrategy": "replace"
     },
     {
-      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",
+      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, .nvmrc and .node-version, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",
       "matchManagers": [
         "github-actions",
         "dockerfile",
         "docker-compose",
         "nvm",
+        "nodenv",
         "custom.jsonata",
         "custom.regex"
       ],
