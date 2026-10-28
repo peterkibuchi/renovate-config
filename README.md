@@ -25,9 +25,10 @@ and tune your own copy. Validate any change with
   gate (so PRs aren't born failing `pnpm install`) and gives the ecosystem time to
   catch yanked or malicious releases before they reach you.
 - **Daily grouped non-major updates, automerged on green CI** — two groups (prod, and
-  dev/tooling — CI managers like GitHub Actions and Dockerfiles, custom managers (such as
-  the biome schema tracker), the `packageManager` pin, `engines` ranges and pnpm catalog
-  entries ride with dev, since lone PRs of those kinds go stale behind their siblings.
+  dev/tooling — CI managers like GitHub Actions and Dockerfiles, `.nvmrc` and
+  `.node-version`, custom managers (such as the biome schema tracker), the
+  `packageManager` pin, `engines` ranges, pnpm catalog entries and overrides ride with
+  dev, since lone PRs of those kinds go stale behind their siblings.
   `engines` uses `rangeStrategy: replace`, so a range only changes when a release falls
   outside it, and Node floors are never raised just because a new Node shipped) on a before-6am
   schedule. Few PRs, few CI runs, nothing left "behind base" to churn.
