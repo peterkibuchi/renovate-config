@@ -35,6 +35,11 @@ and tune your own copy. Validate any change with
   days**: one breaking bump can't block unrelated updates, and a major's early patch
   releases are where regressions surface. CI is the sole gate here; a repo with a thin
   test suite should override with `"automerge": false` for majors.
+- **`prConcurrentLimit: 3`** — at most three Renovate PRs are open at once, so a backlog
+  arrives a few PRs at a time.
+- **Monthly `lockFileMaintenance`, automerged on green** — before 6am on the first of the
+  month, Renovate regenerates the lockfile so transitive dependencies move even when no
+  direct dependency was bumped.
 - **`rebaseWhen: auto`** — Renovate rebases behind-base branches when automerge is on
   or the repo requires up-to-date branches; otherwise only on conflict. Grouping is
   what keeps the rebase count low.
