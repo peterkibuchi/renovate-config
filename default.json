@@ -86,6 +86,20 @@
       "automerge": true
     },
     {
+      "description": "pnpm non-major gets its own PR, still automerged on green: on 23 October one bad pnpm release sat in the dev group and turned seven repos' dev updates red for 5.6 days.",
+      "matchDepNames": [
+        "pnpm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "pnpm",
+      "automerge": true
+    },
+    {
       "description": "Majors automerge too, but stay individual (never grouped) so one breaking bump can't block unrelated updates, and soak longer than the 1-day default: a major's early patch releases are where the regressions surface, and CI can only catch what it tests.",
       "matchUpdateTypes": [
         "major"
