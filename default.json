@@ -106,6 +106,13 @@
       ],
       "automerge": true,
       "minimumReleaseAge": "5 days"
+    },
+    {
+      "description": "nitro 3 ships only as betas and release candidates so far, and Renovate skips prereleases by default, which left sites stranded on an old beta. Follow its prereleases until a stable 3.x lands, then drop this rule.",
+      "matchPackageNames": [
+        "nitro"
+      ],
+      "ignoreUnstable": false
     }
   ],
   "vulnerabilityAlerts": {
