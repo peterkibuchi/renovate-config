@@ -52,5 +52,8 @@ and tune your own copy. Validate any change with
   `minimumReleaseAge`. Renovate defaults this to `null` (no soak), which opens a CVE PR that pnpm
   then refuses to install: red for a day, same landing time, one wasted CI run, and a red PR that
   teaches you to ignore red. **If pnpm's default changes, change this with it.**
+- **nitro follows its prereleases** (`ignoreUnstable: false`): nitro 3 has shipped only betas and
+  release candidates so far, and Renovate skips prereleases by default, so sites built on a beta
+  stayed on it. Drop the rule once a stable 3.x ships.
 - **`vulnerabilityAlerts` automerge** — security fixes skip the schedule and merge on
   green.
