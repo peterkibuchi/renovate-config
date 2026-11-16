@@ -2,7 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Shareable Renovate preset: born-mergeable PRs (release-age gated), daily grouped non-major automerge, minimal CI churn.",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "rangeStrategy": "bump",
   "minimumReleaseAge": "1 day",
