@@ -114,6 +114,16 @@
         "nitro"
       ],
       "ignoreUnstable": false
+    },
+    {
+      "description": "The shared CI workflow in this repo stays on @main in every project, as this preset does, so a change here reaches every repo's next run. Pinning it to a digest would turn each change into a pull request per repo.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepNames": [
+        "peterkibuchi/renovate-config"
+      ],
+      "pinDigests": false
     }
   ],
   "vulnerabilityAlerts": {

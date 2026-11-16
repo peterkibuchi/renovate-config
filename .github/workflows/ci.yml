@@ -1,0 +1,81 @@
+# The one CI job every project runs. A project's own .github/workflows/ci.yml
+# keeps its triggers, permissions and concurrency, and calls this:
+#
+#   jobs:
+#     ci:
+#       uses: peterkibuchi/renovate-config/.github/workflows/ci.yml@main
+#
+# The check then reports as `ci / ci`, which is the name the repo's `main`
+# ruleset requires.
+#
+# It runs the project's own gate: each script below that the root package.json
+# defines, so the project, not this file, decides what its gate is. After the
+# install, every step runs even when an earlier one fails, so one run shows
+# every failure. It never builds unless asked: the host's check builds every
+# pull request. Pass `build: true` where CI is the build gate (a template, or a
+# public product repo whose Actions minutes are free).
+name: ci
+
+on:
+  workflow_call:
+    inputs:
+      build:
+        description: Also run `pnpm build`, for repos where CI is the build gate.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FORCE_COLOR: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Reads the version from package.json's packageManager.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Install dependencies
+        id: install
+        run: pnpm install --frozen-lockfile
+
+      - name: Copy .env.example files to .env
+        run: find . -type f -name ".env.example" -not -path "*/node_modules/*" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
+
+      - name: check
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run --if-present check
+
+      - name: lint:ws
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run --if-present lint:ws
+
+      - name: knip
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run --if-present knip
+
+      - name: typecheck
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run --if-present typecheck
+
+      - name: test
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run --if-present test
+
+      - name: build
+        if: ${{ inputs.build && !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm run build

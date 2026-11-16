@@ -1,0 +1,10 @@
+{
+  "name": "@peterkibuchi/config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The shared Biome config, installed from git: see README.md.",
+  "exports": {
+    "./biome": "./biome.json"
+  },
+  "files": ["biome.json"]
+}
