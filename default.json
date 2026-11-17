@@ -38,7 +38,7 @@
       "automerge": true
     },
     {
-      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin, engines ranges, pnpm catalog entries and overrides count as tooling: with no rule of their own, their green PRs waited for a human. An override usually mirrors a catalog or devDependency entry, so the two move in one PR.",
+      "description": "Dev/tooling deps (non-major): grouped daily, automerge on green. The packageManager pin, engines ranges, pnpm catalog entries and overrides count as tooling: with no rule of their own, their green PRs stayed open until merged by hand. An override usually mirrors a catalog or devDependency entry, so the two move in one PR.",
       "matchDepTypes": [
         "devDependencies",
         "peerDependencies",
@@ -67,7 +67,7 @@
       "rangeStrategy": "replace"
     },
     {
-      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, .nvmrc and .node-version, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings. pinDigest is its own update type, apart from pin and digest: without it, each repo's one-time action-pinning PR waited for a human.",
+      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, .nvmrc and .node-version, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings. pinDigest is its own update type, apart from pin and digest: without it, each repo's one-time action-pinning PR stayed open until merged by hand.",
       "matchManagers": [
         "github-actions",
         "dockerfile",
