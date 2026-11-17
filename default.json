@@ -3,7 +3,7 @@
   "description": "Shareable Renovate preset: born-mergeable PRs (release-age gated), daily grouped non-major automerge, minimal CI churn.",
   "extends": [
     "config:recommended",
-    "helpers:pinGitHubActionDigests"
+    "helpers:pinGitHubActionDigestsToSemver"
   ],
   "rangeStrategy": "bump",
   "minimumReleaseAge": "1 day",
@@ -67,7 +67,7 @@
       "rangeStrategy": "replace"
     },
     {
-      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, .nvmrc and .node-version, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings",
+      "description": "CI/tooling managers (GitHub Actions, Dockerfiles, .nvmrc and .node-version, custom managers such as the biome schema tracker, etc.) ride with dev deps \u2014 they were arriving as individual PRs that went stale behind their siblings. pinDigest is its own update type, apart from pin and digest: without it, each repo's one-time action-pinning PR waited for a human.",
       "matchManagers": [
         "github-actions",
         "dockerfile",
@@ -81,6 +81,7 @@
         "minor",
         "patch",
         "pin",
+        "pinDigest",
         "digest"
       ],
       "groupName": "dev non-major",
