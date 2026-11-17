@@ -93,10 +93,12 @@ and tune your own copy. Validate any change with
   days**: one breaking bump can't block unrelated updates, and a major's early patch
   releases are where regressions surface. CI is the sole gate here; a repo with a thin
   test suite should override with `"automerge": false` for majors.
-- **`helpers:pinGitHubActionDigests`**: every GitHub Action is pinned to a commit SHA, with
-  its version kept as a comment that Renovate bumps. A tag can be moved to new code after you
-  last read it; a SHA can't, so a moved tag can't slip new code into a workflow that holds secrets.
-  The first run opens one pinning PR per repo, grouped with the dev updates.
+- **`helpers:pinGitHubActionDigestsToSemver`**: every GitHub Action is pinned to a commit SHA,
+  with its full version kept as a comment (`# v7.0.1`, not `# v7`) that Renovate bumps with the
+  SHA. A tag can be moved to new code after you last read it; a SHA can't, so a moved tag can't
+  slip new code into a workflow that holds secrets. Pinning adds no update PRs: a new action
+  release rides the daily dev group, as a tag bump did. The one-time pinning (update type
+  `pinDigest`) rides that group too and automerges on green.
 - **`prConcurrentLimit: 3`** — at most three Renovate PRs are open at once, so a backlog
   arrives a few PRs at a time.
 - **Monthly `lockFileMaintenance`, automerged on green** — before 6am on the first of the
