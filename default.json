@@ -88,6 +88,16 @@
       "automerge": true
     },
     {
+      "description": "Pinning an Action to the digest of the version a repo already runs brings in no new code, and a digest pin has no release date, so Renovate's release-age check (timestamp-required by default) stayed pending and the dev group holding the pin never automerged. Pins skip the soak; version and digest moves keep it.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchUpdateTypes": [
+        "pinDigest"
+      ],
+      "minimumReleaseAge": null
+    },
+    {
       "description": "pnpm non-major gets its own PR, still automerged on green: on 23 October one bad pnpm release sat in the dev group and turned seven repos' dev updates red for 5.6 days.",
       "matchDepNames": [
         "pnpm"
