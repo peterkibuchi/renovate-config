@@ -98,7 +98,9 @@ and tune your own copy. Validate any change with
   SHA. A tag can be moved to new code after you last read it; a SHA can't, so a moved tag can't
   slip new code into a workflow that holds secrets. Pinning adds no update PRs: a new action
   release rides the daily dev group, as a tag bump did. The one-time pinning (update type
-  `pinDigest`) rides that group too and automerges on green.
+  `pinDigest`) rides that group too and automerges on green. It skips the 1-day soak: a pin
+  has no release date, so the release-age check stayed pending and held the whole group, and
+  pinning the version a workflow already runs brings in no new code.
 - **`prConcurrentLimit: 3`** — at most three Renovate PRs are open at once, so a backlog
   arrives a few PRs at a time.
 - **Monthly `lockFileMaintenance`, automerged on green** — before 6am on the first of the
